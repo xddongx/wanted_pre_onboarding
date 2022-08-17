@@ -40,3 +40,13 @@ class JobPostingListSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobPosting
         fields = ['id', 'company_name', 'country', 'city', 'position', 'compensation', 'stack']
+
+class JobPostingAnotherListSerializer(serializers.ModelSerializer):
+    company_name = serializers.CharField(source='company.name')
+    country = serializers.CharField(source='company.country')
+    city = serializers.CharField(source='company.city')
+    another = CompanySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = JobPosting
+        fields = ['id', 'company_name', 'country', 'city', 'position', 'compensation', 'stack', 'another']

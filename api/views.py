@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, viewsets, status
 from rest_framework.response import Response
+from rest_framework import filters
 
 from api.models import Company, JobPosting
 from api import serializers
@@ -28,15 +29,14 @@ class JobPostingViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         queryset = JobPosting.objects.all()
         jobPosting = get_object_or_404(queryset, pk=pk)
-        serializer = serializers.JobPostingRetrieveSerializer(jobPosting)
+        serializer = serializers.JobPostingAnotherListSerializer(jobPosting)
+
+        # companyId = jobPosting.company.pk
+        # anotherList = JobPosting.objects.all().filter(company__id=companyId)
+
         return Response(serializer.data)
 
     def update(self, request, pk=None):
-        # try:
-        #    jobPosting = JobPosting.objects.get(pk=pk)
-        # except JobPosting.DoNotExist:
-        #     return Response(status=status.HTTP_404_BAD_REQUEST)
-
         queryset = JobPosting.objects.all()
         jobPosting = get_object_or_404(queryset, pk=pk)
 
@@ -51,3 +51,12 @@ class JobPostingViewSet(viewsets.ViewSet):
         jopPosting = get_object_or_404(queryset, pk=pk)
         jopPosting.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class JobPostingSearchView(generics.ListAPIView):
+    queryset = JobPosting.objects.all()
+    serializer_class = serializers.JobPostingListSerializer
+
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['company__name', 'stack']
+
+
