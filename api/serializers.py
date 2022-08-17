@@ -13,7 +13,12 @@ class JobPostingSerializer(serializers.ModelSerializer):
         model = JobPosting
         fields = ['id', 'company', 'position', 'compensation', 'content', 'stack']
 
-class JobPostingDetailSerializer(serializers.ModelSerializer):
+class JobPostingCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobPosting
+        fields = ['company', 'position', 'compensation', 'content', 'stack']
+
+class JobPostingRetrieveSerializer(serializers.ModelSerializer):
     company_name = serializers.CharField(source='company.name')
     country = serializers.CharField(source='company.country')
     city = serializers.CharField(source='company.city')
@@ -35,4 +40,3 @@ class JobPostingListSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobPosting
         fields = ['id', 'company_name', 'country', 'city', 'position', 'compensation', 'stack']
-
