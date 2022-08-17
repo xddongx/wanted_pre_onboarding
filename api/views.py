@@ -1,10 +1,18 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, viewsets, status
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 from rest_framework import filters
+from rest_framework.status import HTTP_200_OK
 
 from api.models import Company, JobPosting
 from api import serializers
+
+import io
+
+# from api.serializers import JobPostingAnotherListSerializer
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -29,12 +37,23 @@ class JobPostingViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         queryset = JobPosting.objects.all()
         jobPosting = get_object_or_404(queryset, pk=pk)
-        serializer = serializers.JobPostingAnotherListSerializer(jobPosting)
+        serializer = serializers.JobPostingRetrieveSerializer(jobPosting)
 
-        # companyId = jobPosting.company.pk
-        # anotherList = JobPosting.objects.all().filter(company__id=companyId)
+        print("serializer data 1 >>> ", serializer.data)
 
-        return Response(serializer.data)
+        companyId = jobPosting.company.pk
+        anotherList = JobPosting.objects.filter(company=companyId).values_list('pk', flat=True)
+
+        json = JSONRenderer().render(serializer.data)
+
+        stream = io.BytesIO(json)
+        data = JSONParser().parse(stream)
+
+        data["anotherPosts"] = anotherList
+
+        print("data >>> ", data)
+
+        return Response(data)
 
     def update(self, request, pk=None):
         queryset = JobPosting.objects.all()
