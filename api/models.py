@@ -18,4 +18,14 @@ class JobPosting(models.Model):
     def __str__(self):
         return f'{self.company.name}, {self.position}'
 
-# class Application:
+class User(models.Model):
+    name = models.CharField(max_length=20)
+    age = models.IntegerField()
+    phone = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+class Application(models.Model):
+    jobPosting = models.ForeignKey(JobPosting, related_name="jobPosting", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE)

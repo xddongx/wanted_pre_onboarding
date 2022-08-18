@@ -1,14 +1,15 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from api.views import CompanyViewSet, JobPostingSearchView, JobPostingViewSet
+from api import views
 
 router = routers.DefaultRouter()
-router.register(f'company', CompanyViewSet)
-router.register(r'job_posting', JobPostingViewSet, basename='job_posting')
-# router.register(r'some/url', JobPostingSearchView, basename='search')
+router.register(r'company', views.CompanyViewSet)
+router.register(r'job_posting', views.JobPostingViewSet, basename='job_posting')
+router.register(r'user', views.UserViewSet)
+router.register(r'application', views.ApplicationViewSet, basename='application')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('some/url/', JobPostingSearchView.as_view()),
+    path('some/url/', views.JobPostingSearchView.as_view()),
 ]

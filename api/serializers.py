@@ -1,13 +1,24 @@
 from rest_framework import serializers
 
 
-from api.models import Company, JobPosting
+from api.models import Company, JobPosting, User, Application
 
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ['id', 'name', 'country', 'city']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'age', 'phone']
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Application
+        fields = ['id', 'jobPosting', 'user']
 
 class JobPostingSerializer(serializers.ModelSerializer):
     class Meta:
