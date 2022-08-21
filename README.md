@@ -5,8 +5,8 @@
 2. 채용공고 수정
 3. 채용공고 삭제
 4. 채용공고
-    * 목록
-    * 검색
+   * 목록
+   * 검색
 5. 채용 상세 페이지
 6. 채용공고 지원 
 
@@ -120,27 +120,27 @@
 |PUT|/api/job_posting/ID/|특정 채용공고 갱신|
 |DELETE|/api/job_posting/ID/|특정 채용공고 삭제|
 
-> 4-1. 채용공고 목록
+> 4-1.채용공고 목록
 <br>GET /api/job_posting/
 
 ![get 채용공고 리스트](https://user-images.githubusercontent.com/31644115/185795626-8917baa6-7691-4464-bbfe-56a411824d63.JPG)
 
-> 5. 채용공고 상세 페이지
+> 5.채용공고 상세 페이지
 <br>GET /api/job_posting/ID/
 
 ![get 채용공고](https://user-images.githubusercontent.com/31644115/185795618-7c3752b4-d33c-4698-a591-358cfc84c868.JPG)
 
-> 1. 채용공고 등록
+> 1.채용공고 등록
 <br>POST /api/job_posting/
 
 ![post 채용공고](https://user-images.githubusercontent.com/31644115/185795638-7576f2d3-c00e-4f12-a768-5192a6cfc16a.JPG)
 
-> 2. 채용공고 수정
+> 2.채용공고 수정
 <br>PUT /api/job_posting/ID/
 
 ![put 채용공고](https://user-images.githubusercontent.com/31644115/185795645-f3f12203-0b85-41d8-b5af-b3b3075281e9.JPG)
 
-> 3. 채용공고 삭제
+> 3.채용공고 삭제
 <br>DELETE /api/job_posting/ID/
 
 ![delete 최용공고](https://user-images.githubusercontent.com/31644115/185797690-deecffa9-7275-48fa-85fd-1e45fb5ba6b1.JPG)
@@ -154,7 +154,7 @@
 |PUT|/api/application/ID/|특정 지원 갱신|
 |DELETE|/api/application/ID/|특정 지원 삭제|
 
-> 6. 채용공고 지원 목록
+> 6.채용공고 지원 목록
 <br>GET /api/application/
 
 ![get 지원 리스트](https://user-images.githubusercontent.com/31644115/185797701-579b77c1-1859-44ea-a399-e14fe7c8004a.JPG)
@@ -180,7 +180,7 @@
 |:---:|:---:|:---:|
 |GET|/api/some/url?search="검색 단어"|검색 단어가 포함된 채용공고 조회|
 
-> 4-2. 채용공고 검색
+> 4-2.채용공고 검색
 <br>GET /api/some/url?search="검색 단어"
 
 ![get search](https://user-images.githubusercontent.com/31644115/185795657-391240fb-6ec4-4247-9c6a-655e1d984f28.JPG)
