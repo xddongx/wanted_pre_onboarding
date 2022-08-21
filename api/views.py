@@ -121,9 +121,9 @@ class JobPostingViewSet(viewsets.ViewSet):
 
 class JobPostingSearchView(generics.ListAPIView):
     queryset = JobPosting.objects.all()
-    serializer_class = serializers.JobPostingListSerializer
+    serializer_class = serializers.JobPostingRetrieveSerializer
 
     filter_backends = [filters.SearchFilter]
-    search_fields = ['company__name', 'stack']
+    search_fields = ['company__name', 'content', 'stack']
 
 
